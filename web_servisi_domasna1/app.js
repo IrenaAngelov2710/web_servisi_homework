@@ -32,7 +32,7 @@
 const express = require("express");
 const db = require("./pkg/db/index");
 // npm install express-jwt
-// so ovaj paket implementirame protekcija
+// so ovoj paket implementirame protekcija
 const jwt = require("express-jwt");
 
 const moviesHandler = require("./handlers/moviesHandler");
