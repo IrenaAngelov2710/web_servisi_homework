@@ -3,12 +3,12 @@ const moviesHandler = require("./moviesHandler");
 
 // Kreiranje na nov dokument vo kolekcijata
 const createMovie = async (req, res) => {
-    try{
+    try {
         const newMovie = await Movie.create(req.body);
         res.send(newMovie);
     }
     catch(err) {
-        res.status(400).json ({
+        res.status(400).json({
             status: "fail",
             message: err,
         });
@@ -50,7 +50,7 @@ const getAllMovies = async (req, res) => {
 
 // Prikazuvanje na eden dokument od kolekcijata po ID
 const getOneMovie = async (req, res) => {
-    try{
+    try {
         console.log(req.params);
         const movie = await Movie.findById(req.params.id);
 
@@ -62,7 +62,7 @@ const getOneMovie = async (req, res) => {
         });
     }
     catch(err) {
-        res.status(404).json ({
+        res.status(404).json({
             status: "fail",
             message: err,
         });
@@ -77,14 +77,14 @@ const updateMovie = async (req, res) => {
         runValidators: true,
       });
   
-      res.status(200).json({
+      res.status(200).json ({
         status: "success",
         data: {
           updatedMovie,
         },
       });
     } catch (err) {
-      res.status(404).json({
+      res.status(404).json ({
         status: "fail",
         message: err,
       });
