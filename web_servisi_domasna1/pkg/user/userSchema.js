@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 // npm install validator
+// paket na Node.js koj obezbeduva funkcii za validacija i sanitacija na razlicni tipovi na podatoci
 const validator = require("validator");
 // npm install bcryptjs
+// paken na Node.js koj obezbeduva funkcii za hesiranje na lozinkite
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({

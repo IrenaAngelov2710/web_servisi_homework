@@ -1,6 +1,9 @@
 const User = require("../pkg/user/userSchema");
 // npm install jsonwebtoken
+// paket na Node.js koj obezbeduva funkcionalnosti za generiranje i verifikacija  na JSON Web Tokens
 const jwt = require("jsonwebtoken");
+// npm install bcryptjs
+// paken na Node.js koj obezbeduva funkcii za hesiranje na lozinkite
 const bcrypt = require("bcryptjs");
 
 exports.signup = async (req, res) => {

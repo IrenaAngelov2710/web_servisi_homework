@@ -18,14 +18,15 @@
 //? delete
 
 //! Vo terminal
-// npm init -y
-// npm install express
-// npm install mongoose
-// npm install dotenv
-// npm install express-jwt
+// npm init -y (package.json)
+// npm install express (se povikuva vo app.js)
+// npm install mongoose (se povikuva vo moviesSchema.js, userSchema.js i index.js(db))
+// npm install dotenv (se povikuva vo index.js(db))
+// npm install express-jwt (se povikuva vo app.js)
 // npm install jsonwebtoken
-// npm install bcryptjs
+// npm install bcryptjs (se povikuva vo userSchema.js)
 // npm install bcrypt
+// npm install validator (se povikuva vo userSchema.js)
 
 //? Gi povikuvame paketite
 const express = require("express");
@@ -44,10 +45,13 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 //? Se izvrsuva init funkcijata so koja funkcija se konektirame so data baza
 db.init();
 
-// ovde koristime middelwarot sto ni ovozmuzva da gi protektirame rutite, kako prv parametar imame jwt.expressjwt , vnatre go stavame algoritmot za hashiranje i tajnaata poraka. i so pomosh na ovaj middelware gi protektirame site ruti osven onie ruti koi se vo unless metodata
+// ovde koristime middelwarot sto ni ovozmuzva da gi protektirame rutite,kako prv parametar imame jwt.expressjwt, 
+// vnatre go stavame algoritmot za hashiranje i tajnaata poraka
+// i so pomosh na ovaj middelware gi protektirame site ruti osven onie ruti koi se vo unless metodata
 app.use(
     jwt
       .expressjwt({
