@@ -3,7 +3,7 @@ const User = require("../pkg/user/userSchema");
 // paket na Node.js koj obezbeduva funkcionalnosti za generiranje i verifikacija  na JSON Web Tokens
 const jwt = require("jsonwebtoken");
 // npm install bcryptjs
-// paken na Node.js koj obezbeduva funkcii za hesiranje na lozinkite
+// paket na Node.js koj obezbeduva funkcii za hesiranje na lozinkite
 const bcrypt = require("bcryptjs");
 
 exports.signup = async (req, res) => {
@@ -27,7 +27,7 @@ exports.signup = async (req, res) => {
       }
     );
 
-    // res.kkoies ima tri parametri prviot so kako se vika kukisot vtoriot vrednosta na kukisot i tretiot parametar dodatni opcii
+    // res.kukis ima tri parametri prviot so kako se vika kukisot, vtoriot vrednosta na kukisot i tretiot parametar dodatni opcii
     res.cookie("jwt", token, {
       expires: new Date(
         Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
@@ -36,7 +36,7 @@ exports.signup = async (req, res) => {
       httpOnly: true,
     });
 
-    // res.status ni vrakja token status i koirinkisot
+    // res.status ni vrakja token status i korisnikot
     res.status(201).json({
       status: "success",
       token,
@@ -52,7 +52,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // 1. Proveruvame dali ima vneseno passvord i email
+    // 1. Proveruvame dali ima vneseno password i email
     if (!email || !password) {
       return res.status(400).send("Please provide email and password!");
     }
@@ -64,7 +64,7 @@ exports.login = async (req, res) => {
         .send("This user with this eamil doest exist in database");
     }
 
-    // 3. Sporeduvame pasvord
+    // 3. Sporeduvame password
     const isPasswordValid = bcrypt.compareSync(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).send("Invalid email or password!");
