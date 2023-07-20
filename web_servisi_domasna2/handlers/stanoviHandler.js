@@ -20,20 +20,35 @@ exports.create = async (req, res) => {
 
 // Prikazuvanje na site dokumenti vo kolekcijata
 exports.getAll = async (req, res) => {
-    try {
-        let stanovi = await Stan.find();
-        res.status(200).json({
-            status: "success",
-            data: {
-                stanovi,
-            },
-        });
-    } catch(err) {
-        res.status(404).json({
-            status: "fail",
-            message: err
-        });
-    }
+  try {
+    console.log(req.query);
+    // pravime kopija od objektot ne sakame da go modificirame originalnoto query
+    const queryObj = { ...req.query };
+    // ovoj objekt go konvertirame vo string
+    let queryString = JSON.stringify(queryObj);
+    // go modificirame stringot
+    queryString = queryString.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      (match) => `$${match}`
+    );
+    // od koga ke go modificirame go vrakame nazad vo objekt
+    const query = JSON.parse(queryString);
+    // so find metodagta gi zemame site dokumenti od edna kolekcija
+    const stanovi = await Stan.find(query);
+     
+    res.status(200).json({
+      status: "Success",
+      data: {
+        stanovi: stanovi,
+      },
+    }); 
+  }
+  catch(err){
+    res.status(404).json({
+      status: "fail",
+      message: err
+    });
+  }
 };
 
 // Prikazuvanje na eden dokument od kolekcijata po ID

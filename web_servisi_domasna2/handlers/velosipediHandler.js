@@ -21,17 +21,32 @@ exports.create = async (req, res) => {
   // Prikazuvanje na site dokumenti vo kolekcijata
   exports.getAll = async (req, res) => {
     try {
-      let velosipedi = await Velosiped.find();
+      console.log(req.query);
+      // pravime kopija od objektot ne sakame da go modificirame originalnoto query
+      const queryObj = { ...req.query };
+      // ovoj objekt go konvertirame vo string
+      let queryString = JSON.stringify(queryObj);
+      // go modificirame stringot
+      queryString = queryString.replace(
+        /\b(gte|gt|lte|lt)\b/g,
+        (match) => `$${match}`
+      );
+      // od koga ke go modificirame go vrakame nazad vo objekt
+      const query = JSON.parse(queryString);
+      // so find metodagta gi zemame site dokumenti od edna kolekcija
+      const velosipedi = await Velosiped.find(query);
+       
       res.status(200).json({
-        status: "success",
+        status: "Success",
         data: {
-          velosipedi,
+          velosipedi: velosipedi,
         },
-      });
-    } catch (err) {
+      }); 
+    }
+    catch(err){
       res.status(404).json({
         status: "fail",
-        message: err,
+        message: err
       });
     }
   };
