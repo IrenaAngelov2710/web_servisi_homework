@@ -1,0 +1,17 @@
+body {
+  background-color: bisque;
+}
+
+h1 {
+  color: rgb(129, 43, 43)
+}
+
+.cena {
+  color: rgb(13, 72, 28);
+}
+
+.oglas {
+  background-color: whitesmoke;
+  border: 10px rgb(72, 72, 72);
+}
+
